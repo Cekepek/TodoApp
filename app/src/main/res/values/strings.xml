@@ -6,4 +6,8 @@
     <string name="judulnewtodo">New Todo</string>
     <string name="add">Add</string>
     <string name="checkbox">Check Box</string>
+    <string name="priority">Priority</string>
+    <string name="mediumpriority">Medium Priority</string>
+    <string name="lowpriority">Low Priority</string>
+    <string name="highpriority">High Priority</string>
 </resources>
