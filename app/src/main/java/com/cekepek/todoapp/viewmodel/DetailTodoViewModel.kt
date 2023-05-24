@@ -14,33 +14,17 @@ import kotlin.coroutines.CoroutineContext
 
 class DetailTodoViewModel(application: Application):AndroidViewModel(application), CoroutineScope
 {
-    val todoLD = MutableLiveData<List<Todo>>()
-    val todoLoadErrorLD = MutableLiveData<Boolean>()
-    val loadingLD = MutableLiveData<Boolean>()
     private var job = Job()
+
     override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.IO
+        get() = job+Dispatchers.IO
 
-    fun refresh(){
-        loadingLD.value = true
-        todoLoadErrorLD.value = false
-
-        launch {
-            val db = Room.databaseBuilder(getApplication(), TodoDatabase::class.java,
-                "tododb").build()
-
-            todoLD.postValue(db.todoDao().selectAllTodo()) //kalau data banyak pakai .postvalue kalo cuma 1 langsung .value
-        }
-    }
-
-    fun clearTask(todo: Todo) {
+    fun addTodo (todo:Todo){
         launch {
             val db = Room.databaseBuilder(
-                getApplication(),
-                TodoDatabase::class.java, "newtododb").build()
-            db.todoDao().deleteTodo(todo)
-
-            todoLD.postValue(db.todoDao().selectAllTodo())
+                getApplication(), TodoDatabase::class.java,
+                "newtododb").build()
+            db.todoDao().insertAll(todo)
         }
     }
 
