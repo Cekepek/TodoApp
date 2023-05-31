@@ -1,6 +1,8 @@
 package com.cekepek.todoapp.viewmodel
 
 import android.app.Application
+import android.icu.text.CaseMap.Title
+import android.webkit.WebSettings.RenderPriority
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
@@ -33,6 +35,13 @@ class DetailTodoViewModel(application: Application):AndroidViewModel(application
         launch {
             val db = buildDb(getApplication())
             todoLd.postValue(db.todoDao().selectTodo(uuid))
+        }
+    }
+
+    fun update(title: String, notes:String, priority: Int, uuid: Int){
+        launch {
+            val db = buildDb(getApplication())
+            db.todoDao().update(title, notes, priority, uuid)
         }
     }
 }

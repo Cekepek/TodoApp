@@ -1,12 +1,15 @@
 package com.cekepek.todoapp.view
 
 import android.os.Bundle
+import android.provider.MediaStore.Audio.Radio
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
@@ -35,9 +38,11 @@ class CreateTodoFragment : Fragment() {
 
         val btnAdd = view.findViewById<Button>(R.id.btnAdd)
         btnAdd.setOnClickListener {
+            var radioGroupPriority = view. findViewById<RadioGroup>(R.id.radioGroupPriority)
+            val radio = view.findViewById<RadioButton>(radioGroupPriority.checkedRadioButtonId) //mendapatkan radio button yang terpilih saja
             val txtTitle = view.findViewById<EditText>(R.id.txtTitle)
             val txtNotes = view.findViewById<EditText>(R.id.txtNotes)
-            val todo = Todo(txtTitle.text.toString(), txtNotes.text.toString())
+            val todo = Todo(txtTitle.text.toString(), txtNotes.text.toString(), radio.tag.toString().toInt())
             viewModel.addTodo(todo)
             Toast.makeText(view.context, "Todo added", Toast.LENGTH_LONG).show()
             Navigation.findNavController(it).popBackStack()//untuk kembali ke layar sebelumnya
