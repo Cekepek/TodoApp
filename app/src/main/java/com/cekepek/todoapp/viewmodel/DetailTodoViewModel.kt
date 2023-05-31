@@ -11,10 +11,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.UUID
 import kotlin.coroutines.CoroutineContext
 
 class DetailTodoViewModel(application: Application):AndroidViewModel(application), CoroutineScope
 {
+    val todoLd = MutableLiveData<Todo>()
     private var job = Job()
 
     override val coroutineContext: CoroutineContext
@@ -27,4 +29,10 @@ class DetailTodoViewModel(application: Application):AndroidViewModel(application
         }
     }
 
+    fun fetch(uuid: Int){
+        launch {
+            val db = buildDb(getApplication())
+            todoLd.postValue(db.todoDao().selectTodo(uuid))
+        }
+    }
 }
