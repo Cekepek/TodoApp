@@ -28,7 +28,7 @@ class ListTodoViewModel(application: Application): AndroidViewModel(application)
         launch {
             val db = buildDb(getApplication())
 
-            todoLD.postValue(db.todoDao().selectAllTodo()) //kalau data banyak pakai .postvalue kalo cuma 1 langsung .value
+            todoLD.postValue(db.todoDao().selectUnfinishedTodo()) //kalau data banyak pakai .postvalue kalo cuma 1 langsung .value
         }
     }
 
@@ -37,7 +37,14 @@ class ListTodoViewModel(application: Application): AndroidViewModel(application)
             val db = buildDb(getApplication())
             db.todoDao().deleteTodo(todo)
 
-            todoLD.postValue(db.todoDao().selectAllTodo())
+            todoLD.postValue(db.todoDao().selectUnfinishedTodo())
+        }
+    }
+
+    fun updateIsDone(uuid: Int) {
+        launch {
+            val db = buildDb(getApplication())
+            db.todoDao().updateIsDone(uuid)
         }
     }
 }

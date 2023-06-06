@@ -42,7 +42,7 @@ class CreateTodoFragment : Fragment() {
             val radio = view.findViewById<RadioButton>(radioGroupPriority.checkedRadioButtonId) //mendapatkan radio button yang terpilih saja
             val txtTitle = view.findViewById<EditText>(R.id.txtTitle)
             val txtNotes = view.findViewById<EditText>(R.id.txtNotes)
-            val todo = Todo(txtTitle.text.toString(), txtNotes.text.toString(), radio.tag.toString().toInt())
+            val todo = Todo(txtTitle.text.toString(), txtNotes.text.toString(), radio.tag.toString().toInt(), 0)
             viewModel.addTodo(todo)
             Toast.makeText(view.context, "Todo added", Toast.LENGTH_LONG).show()
             Navigation.findNavController(it).popBackStack()//untuk kembali ke layar sebelumnya

@@ -5,10 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.cekepek.todoapp.R
 import com.cekepek.todoapp.model.Todo
+import com.cekepek.todoapp.util.buildDb
+import com.cekepek.todoapp.viewmodel.DetailTodoViewModel
+import com.cekepek.todoapp.viewmodel.ListTodoViewModel
 
 class TodoListAdapter(val todos:ArrayList<Todo>,val todoOnClick:(Todo) -> Unit)
     : RecyclerView.Adapter<TodoListAdapter.TodoViewHolder>() {
@@ -28,7 +33,8 @@ class TodoListAdapter(val todos:ArrayList<Todo>,val todoOnClick:(Todo) -> Unit)
 
         checkTask.setOnCheckedChangeListener { compoundButton, isChecked ->
             if(isChecked) {
-                todoOnClick(todos[position])
+                todos[position].is_done = 1
+//                todoOnClick(todos[position])
             }
         }
 
@@ -48,5 +54,4 @@ class TodoListAdapter(val todos:ArrayList<Todo>,val todoOnClick:(Todo) -> Unit)
         todos.addAll(newtodos)
         notifyDataSetChanged()
     }
-
 }
