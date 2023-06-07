@@ -19,7 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class TodoListFragment : Fragment() {
     private lateinit var viewModel: ListTodoViewModel
     private val  todoListAdapter = TodoListAdapter(arrayListOf(),
-        { item -> viewModel.clearTask(item) }) //arrayListOf untuk membuat array kosong
+        { item -> viewModel.updateIsDone(item.uuid) }) //arrayListOf untuk membuat array kosong
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

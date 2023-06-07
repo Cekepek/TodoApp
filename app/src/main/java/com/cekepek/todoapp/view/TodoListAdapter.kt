@@ -33,8 +33,7 @@ class TodoListAdapter(val todos:ArrayList<Todo>,val todoOnClick:(Todo) -> Unit)
 
         checkTask.setOnCheckedChangeListener { compoundButton, isChecked ->
             if(isChecked) {
-                todos[position].is_done = 1
-//                todoOnClick(todos[position])
+                todoOnClick(todos[position])
             }
         }
 
