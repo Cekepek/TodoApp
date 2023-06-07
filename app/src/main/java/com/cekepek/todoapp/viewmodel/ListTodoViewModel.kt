@@ -45,6 +45,8 @@ class ListTodoViewModel(application: Application): AndroidViewModel(application)
         launch {
             val db = buildDb(getApplication())
             db.todoDao().updateIsDone(uuid)
+
+            todoLD.postValue(db.todoDao().selectUnfinishedTodo())
         }
     }
 }
