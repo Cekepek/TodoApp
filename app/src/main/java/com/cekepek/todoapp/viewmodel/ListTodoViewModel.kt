@@ -32,10 +32,10 @@ class ListTodoViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
-    fun clearTask(uuid: Int) {
+    fun clearTask(todo: Todo) {
         launch {
             val db = buildDb(getApplication())
-            db.todoDao().updateIsDone(uuid)
+            db.todoDao().deleteTodo(todo)
 
             todoLD.postValue(db.todoDao().selectUnfinishedTodo())
 //            val db = buildDb(getApplication())

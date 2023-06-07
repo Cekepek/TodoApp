@@ -63,7 +63,6 @@ class TodoListAdapter(val todos:ArrayList<Todo>,val todoOnClick:(Todo) -> Unit)
 
     override fun onCheckedChange(cb: CompoundButton, isChecked: Boolean, obj: Todo) {
         if(isChecked) {
-            obj.is_done = 1
             todoOnClick(obj)
         }
     }
