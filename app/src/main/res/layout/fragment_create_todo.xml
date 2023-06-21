@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="todo"
+            type="com.cekepek.todoapp.model.Todo" />
+        <variable
+            name="radiolistener"
+            type="com.cekepek.todoapp.view.FragmentCreateTodoLayoutInterface" />
+        <variable
+            name="buttonlistener"
+            type="com.cekepek.todoapp.view.FragmentCreateTodoLayoutInterface" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.CreateTodoFragment">
@@ -18,6 +32,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:text="@string/add"
+                android:onClick="@{buttonlistener::onButtonAddTodo}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroupPriority" />
 
@@ -89,14 +104,15 @@
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" >
+                app:layout_constraintTop_toBottomOf="@+id/textView2">
 
                 <RadioButton
                     android:id="@+id/radioHigh"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:tag="3"
+                    android:onClick="@{(view)->radiolistener.onRadioClick(view, 3, todo) }"
+                    android:checked="@{todo.priority==3?true:false}"
                     android:text="@string/highpriority" />
 
                 <RadioButton
@@ -104,6 +120,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:tag="2"
+                    android:onClick="@{(view)->radiolistener.onRadioClick(view, 2, todo) }"
+                    android:checked="@{todo.priority==2?true:false}"
                     android:text="@string/mediumpriority" />
 
                 <RadioButton
@@ -111,9 +129,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:tag="1"
+                    android:onClick="@{(view)->radiolistener.onRadioClick(view, 1, todo) }"
+                    android:checked="@{todo.priority==1?true:false}"
                     android:text="@string/lowpriority" />
 
             </RadioGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
+</layout>

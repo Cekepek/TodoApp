@@ -14,3 +14,8 @@ interface FragmentEditTodoLayoutInterface{
     fun onRadioClick(v:View, priority:Int, obj: Todo )
     fun onTodoSave(v:View, obj:Todo)
 }
+
+interface FragmentCreateTodoLayoutInterface{
+    fun onRadioClick(v:View, priority:Int, obj: Todo )
+    fun onButtonAddTodo(v:View)
+}
